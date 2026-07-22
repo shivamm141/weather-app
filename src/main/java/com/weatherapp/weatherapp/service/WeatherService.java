@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+import com.weatherapp.weatherapp.dto.OpenWeatherResponse;
+
 
 @Service
 public class WeatherService {
@@ -17,13 +19,13 @@ public class WeatherService {
     this.restClient = RestClient.create();
     }
 
-    public String getWeather(String city){
+    public OpenWeatherResponse getWeather(String city){
 
-        String response = restClient.get() //use our resclient object to prepare an http get request
-        .uri ("https://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}",
+        OpenWeatherResponse response = restClient.get() //use our resclient object to prepare an http get request
+        .uri ("https://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}&units=metric",
                     city, apiKey)
         .retrieve()//senf the request and prepare for the reponse
-        .body(String.class); // whateer maybe the respone give it in string
+        .body(OpenWeatherResponse.class); // whateer maybe the respone give it in string
         return response;
 
     }
