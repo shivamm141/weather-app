@@ -1,6 +1,6 @@
 package com.weatherapp.weatherapp.dto;
 
-public class mainWeatherData {
+public class MainWeatherData {
     private double temp;
     private int humidity;
 

@@ -1,9 +1,14 @@
+
 package com.weatherapp.weatherapp.dto;
+import java.util.List;
+
+
 
 public class OpenWeatherResponse {
+    private List<WeatherDescription> weather;
 
     private String name;
-    private mainWeatherData main;
+    private MainWeatherData main;
 
     public String getName() {
         return name;
@@ -13,12 +18,22 @@ public class OpenWeatherResponse {
         this.name = name;
     }
 
-    public mainWeatherData getMain() {
+    public MainWeatherData getMain() {
         return main;
     }
 
-    public void setMain(mainWeatherData main) {
+    public void setMain(MainWeatherData main) {
         this.main = main;
     }
+    public List<WeatherDescription> getWeather() {
+    return weather;
+}
+
+    public void setWeather(List<WeatherDescription> weather) {
+        this.weather = weather;
+    }
+    
+    
+    
     
 }

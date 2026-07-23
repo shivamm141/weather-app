@@ -4,7 +4,7 @@ package com.weatherapp.weatherapp.service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
-
+import com.weatherapp.weatherapp.dto.WeatherResponse;
 import com.weatherapp.weatherapp.dto.OpenWeatherResponse;
 
 
@@ -19,14 +19,20 @@ public class WeatherService {
     this.restClient = RestClient.create();
     }
 
-    public OpenWeatherResponse getWeather(String city){
+    public WeatherResponse getWeather(String city){
 
         OpenWeatherResponse response = restClient.get() //use our resclient object to prepare an http get request
         .uri ("https://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}&units=metric",
                     city, apiKey)
         .retrieve()//senf the request and prepare for the reponse
         .body(OpenWeatherResponse.class); // whateer maybe the respone give it in string
-        return response;
+        
+        return new WeatherResponse(
+        response.getName(),
+        response.getMain().getTemp(),
+        response.getMain().getHumidity(),
+        response.getWeather().get(0).getDescription()
+        );
 
     }
 }

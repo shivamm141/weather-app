@@ -3,7 +3,7 @@ package com.weatherapp.weatherapp.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.weatherapp.weatherapp.dto.OpenWeatherResponse;
+import com.weatherapp.weatherapp.dto.WeatherResponse;
 
 import com.weatherapp.weatherapp.service.WeatherService;
 
@@ -16,7 +16,7 @@ public class WeatherController {
 }
 
     @GetMapping("/weather") // this method handles Get request to /weather
-    public OpenWeatherResponse handleWeatherRequest(@RequestParam String city) {
+    public WeatherResponse handleWeatherRequest(@RequestParam String city) {
         return weatherService.getWeather(city);//method of service class using obj refernce 
         
     }
