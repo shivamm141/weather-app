@@ -21,6 +21,9 @@ public class WeatherService {
     }
 
     public WeatherResponse getWeather(String city){
+        if(city == null || city.trim().isEmpty()){
+            throw new IllegalArgumentException("city name is required");
+        }
 
         try{  //try and catch for error handling 
             OpenWeatherResponse response = restClient.get() //use our resclient object to prepare an http get request
