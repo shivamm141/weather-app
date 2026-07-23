@@ -8,6 +8,14 @@ import com.weatherapp.weatherapp.dto.WeatherResponse;
 import com.weatherapp.weatherapp.dto.OpenWeatherResponse;
 import com.weatherapp.weatherapp.exception.CityNotFoundException;
 import org.springframework.web.client.HttpClientErrorException;
+import com.weatherapp.weatherapp.dto.ForecastApiResponse;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import com.weatherapp.weatherapp.dto.ForecastItem;
+import com.weatherapp.weatherapp.dto.DailyForecast;
 
 @Service
 public class WeatherService {
@@ -42,5 +50,71 @@ public class WeatherService {
             throw new CityNotFoundException("City Not Found :  " + city);
         }
 
+    }
+    public List<DailyForecast> getForecast(String city) {
+
+        if (city == null || city.trim().isEmpty()) {
+            throw new IllegalArgumentException("City name is required");
+        }
+
+        try {
+            ForecastApiResponse response = restClient.get()
+                    .uri(
+                        "https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={apiKey}&units=metric",
+                        city, apiKey
+                    )
+                    .retrieve()
+                    .body(ForecastApiResponse.class);
+
+                Map<String, List<ForecastItem>> groupedByDate = new LinkedHashMap<>();
+
+                for (ForecastItem item : response.getList()) {
+
+                     String date = item.getDt_txt().substring(0, 10);
+
+                    groupedByDate
+                        .computeIfAbsent(date, k -> new ArrayList<>())
+                        .add(item);
+                }
+
+            List<DailyForecast> dailyForecasts = new ArrayList<>();
+
+            for (Map.Entry<String, List<ForecastItem>> entry : groupedByDate.entrySet()) {
+
+                String date = entry.getKey();
+                List<ForecastItem> items = entry.getValue();
+
+                double minTemp = Double.MAX_VALUE;
+                double maxTemp = -Double.MAX_VALUE;
+
+                for (ForecastItem item : items) {
+                    double temp = item.getMain().getTemp();
+
+                    if (temp < minTemp) {
+                        minTemp = temp;
+                    }
+
+                    if (temp > maxTemp) {
+                        maxTemp = temp;
+                    }
+                }
+
+                String description = items.get(0)
+                        .getWeather()
+                        .get(0)
+                        .getDescription();
+
+                dailyForecasts.add(
+                    new DailyForecast(date, minTemp, maxTemp, description)
+                );
+            }
+
+            return dailyForecasts.stream()
+                .limit(5)
+                .toList();
+
+        } catch (HttpClientErrorException.NotFound e) {
+            throw new CityNotFoundException("City not found: " + city);
+        }
     }
 }
