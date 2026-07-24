@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weatherly — Premium Weather Dashboard</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="weather-sunny">
+  <div class="page-shell">
+    <div class="background-overlay"></div>
+
+    <aside class="sidebar" aria-label="Weather sidebar">
+      <div class="brand-panel glass-card">
+        <div class="brand-logo">W</div>
+        <div>
+          <p class="brand-label">Weatherly</p>
+          <p class="brand-text">Premium weather intelligence</p>
+        </div>
+      </div>
+
+      <section class="glass-card status-card" aria-labelledby="status-title">
+        <div class="status-label" id="status-title">Live Weather</div>
+        <div class="status-value" id="sidebar-temperature">27°</div>
+        <p class="status-meta" id="sidebar-location">Jakarta, Indonesia</p>
+        <div class="status-pill">
+          <span class="pill-icon"><i class="fa-solid fa-sun"></i></span>
+          <span id="status-text">Sunny</span>
+        </div>
+      </section>
+
+      <section class="glass-card analytics-card" aria-labelledby="analytics-title">
+        <div class="section-heading" id="analytics-title">
+          <span>Atmospheric insights</span>
+          <span class="chip">Live</span>
+        </div>
+        <div class="analytics-grid">
+          <div class="analytics-item">
+            <span class="analytics-label">Humidity</span>
+            <strong id="sidebar-humidity">61%</strong>
+          </div>
+          <div class="analytics-item">
+            <span class="analytics-label">Wind</span>
+            <strong id="sidebar-wind">10 km/h</strong>
+          </div>
+          <div class="analytics-item">
+            <span class="analytics-label">Pressure</span>
+            <strong id="sidebar-pressure">1018 hPa</strong>
+          </div>
+          <div class="analytics-item">
+            <span class="analytics-label">Visibility</span>
+            <strong id="sidebar-visibility">9 km</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="glass-card location-card" aria-labelledby="location-title">
+        <div class="section-heading" id="location-title">
+          <span>Selected location</span>
+          <button class="icon-button" aria-label="Change location">
+            <i class="fa-solid fa-location-dot"></i>
+          </button>
+        </div>
+        <div class="location-details">
+          <div class="location-meta">
+            <p class="location-city" id="selected-city">Jakarta</p>
+            <p class="location-subtitle">Current weather zone</p>
+          </div>
+          <div class="location-flag" aria-hidden="true">🌍</div>
+        </div>
+      </section>
+    </aside>
+
+    <main class="main-stage" aria-label="Main weather content">
+      <section class="hero-panel glass-card">
+        <div class="hero-header">
+          <div>
+            <p class="eyebrow">Current location</p>
+            <h1 id="city-name">Jakarta</h1>
+            <p id="current-date" class="hero-date">Tuesday, June 25</p>
+          </div>
+          <div class="hero-summary">
+            <span class="hero-temp" id="temperature">27°C</span>
+            <span class="temp-range" id="temp-range">H 31° • L 24°</span>
+          </div>
+        </div>
+
+        <div class="hero-grid">
+          <div class="hero-info">
+            <div class="hero-labels">
+              <span class="weather-chip" id="weather-chip-1">Cloudy</span>
+              <span class="weather-chip accent" id="weather-chip-2">7% chance of rain</span>
+            </div>
+            <h2 id="condition">Broken Clouds</h2>
+            <p id="weather-description">
+              A light breeze passes through the high-rise city, keeping temperatures mild and comfortable.
+            </p>
+
+            <div class="hero-metrics">
+              <div class="metric-row">
+                <span class="metric-label">Humidity</span>
+                <strong id="humidity">66%</strong>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Wind speed</span>
+                <strong id="wind">12 km/h</strong>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Feels like</span>
+                <strong id="feels-like">29°C</strong>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Pressure</span>
+                <strong id="pressure">1016 hPa</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="hero-visual-card">
+              <div class="hero-icon-wrapper">
+                <i class="fa-solid fa-cloud-sun"></i>
+              </div>
+              <div class="hero-visual-copy">
+                <p>Cloud cover</p>
+                <strong>68%</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="forecast-card glass-card" aria-labelledby="forecast-label">
+        <div class="section-heading" id="forecast-label">
+          <span>Weekly forecast</span>
+          <span class="chip soft">Forecast timeline</span>
+        </div>
+
+        <div id="forecast-graph" class="forecast-graph" aria-hidden="true">
+          <div class="graph-column"><span>Mon</span><div class="graph-bar active"></div><strong>22°</strong></div>
+          <div class="graph-column"><span>Tue</span><div class="graph-bar"></div><strong>26°</strong></div>
+          <div class="graph-column"><span>Wed</span><div class="graph-bar active"></div><strong>29°</strong></div>
+          <div class="graph-column"><span>Thu</span><div class="graph-bar"></div><strong>25°</strong></div>
+          <div class="graph-column"><span>Fri</span><div class="graph-bar active"></div><strong>27°</strong></div>
+        </div>
+
+        <ul id="forecast-container" class="forecast-list">
+          <li class="forecast-item"><span>Mon</span><i class="fa-solid fa-cloud-sun"></i><span>24°</span></li>
+          <li class="forecast-item"><span>Tue</span><i class="fa-solid fa-cloud-showers-heavy"></i><span>26°</span></li>
+          <li class="forecast-item active"><span>Wed</span><i class="fa-solid fa-cloud"></i><span>29°</span></li>
+          <li class="forecast-item"><span>Thu</span><i class="fa-solid fa-cloud-rain"></i><span>25°</span></li>
+          <li class="forecast-item"><span>Fri</span><i class="fa-solid fa-sun"></i><span>28°</span></li>
+        </ul>
+      </section>
+    </main>
+
+    <aside class="panel" aria-label="Weather panel">
+      <section class="glass-card search-card">
+        <div class="search-header">
+          <div>
+            <p class="eyebrow">Search city</p>
+            <h2>Find weather anywhere</h2>
+          </div>
+          <button class="icon-button" aria-label="Download report">
+            <i class="fa-solid fa-download"></i>
+          </button>
+        </div>
+
+        <div class="search-group">
+          <input
+            id="search-input"
+            class="search-input"
+            type="search"
+            placeholder="Search city, country"
+            aria-label="Search city"
+          />
+          <button id="search-button" class="search-action" aria-label="Search weather">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </section>
+
+       <section class="glass-card summary-panel" aria-labelledby="summary-label">
+         <div class="section-heading" id="summary-label">
+           <span>Weather summary</span>
+           <span class="chip">Daily view</span>
+         </div>
+
+         <div class="summary-grid">
+         <div class="summary-item">
+          <span>Sunrise</span>
+          <strong id="sunrise">06:03</strong>
+         </div>
+
+         <div class="summary-item">
+          <span>Sunset</span>
+          <strong id="sunset">18:21</strong>
+        </div>
+
+    <div class="summary-item">
+      <span>UV index</span>
+      <strong>3.7</strong>
+    </div>
+
+    <div class="summary-item">
+      <span>Air quality</span>
+      <strong>Good</strong>
+    </div>
+  </div>
+</section>
+
+      <section class="glass-card recent-card" aria-labelledby="recent-label">
+        <div class="section-heading" id="recent-label">
+          <span>Recently searched</span>
+          <span class="chip soft">Quick access</span>
+        </div>
+        <ul class="recent-list">
+          <li><button type="button">New York</button></li>
+          <li><button type="button">London</button></li>
+          <li><button type="button">Tokyo</button></li>
+          <li><button type="button">Dubai</button></li>
+        </ul>
+      </section>
+
+      <section class="glass-card mini-weather" aria-labelledby="mini-label">
+        <div class="section-heading" id="mini-label">
+          <span>City snapshots</span>
+          <span class="chip soft">Live cards</span>
+        </div>
+        <div class="mini-grid">
+          <article class="mini-tile"><span>San Francisco</span><strong>18°</strong><small>Cloudy</small></article>
+          <article class="mini-tile"><span>Berlin</span><strong>22°</strong><small>Sunny</small></article>
+          <article class="mini-tile"><span>Sydney</span><strong>15°</strong><small>Rainy</small></article>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -44,8 +44,15 @@ public class WeatherService {
             response.getName(),
             response.getMain().getTemp(),
             response.getMain().getHumidity(),
-            response.getWeather().get(0).getDescription()
+            response.getWeather().get(0).getDescription(),
+            response.getWind().getSpeed(),
+            response.getMain().getFeels_like(),
+            response.getMain().getPressure(),
+            response.getVisibility(),
+            response.getSys().getSunrise(),
+            response.getSys().getSunset()
             );
+            
         }catch (HttpClientErrorException.NotFound e){ // if throw httperror catch ctaches it and throw new city not found package constructor //specifically represent an http 404 not found
             throw new CityNotFoundException("City Not Found :  " + city);
         }
